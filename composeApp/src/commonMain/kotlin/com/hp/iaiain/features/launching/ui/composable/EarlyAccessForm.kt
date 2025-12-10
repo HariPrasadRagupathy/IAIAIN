@@ -165,7 +165,7 @@ fun EarlyAccessSection(
             }
 
             PrimaryButton(
-                text = "✓ Join the Waitlist",
+                text = "Join the Waitlist",
                 onClick = onSubmit,
                 enabled = !isSubmitting,
                 isLoading = isSubmitting,

@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.Image
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,16 +25,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.painterResource
+import iaiain.composeapp.generated.resources.Res
+import iaiain.composeapp.generated.resources.logo
 import com.hp.iaiain.design.components.FeatureCard
 import com.hp.iaiain.design.system.AccentGreen
 import com.hp.iaiain.design.system.AccentOrange
+import com.hp.iaiain.design.system.BackgroundMedium
 import com.hp.iaiain.design.system.CornerRadius
 import com.hp.iaiain.design.system.IconSize
 import com.hp.iaiain.design.system.Spacing
 import com.hp.iaiain.design.system.SurfaceLight
 import com.hp.iaiain.design.system.TextGray
 import com.hp.iaiain.design.system.TextWhite
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import iaiain.composeapp.generated.resources.campushubicon
+import iaiain.composeapp.generated.resources.glocalhubicon
+import iaiain.composeapp.generated.resources.juniorhubIcon
 
 @Composable
 fun LaunchingHeaderSection() {
@@ -53,15 +60,15 @@ fun LaunchingHeaderSection() {
                 modifier = Modifier
                     .size(IconSize.xl)
                     .background(
-                        color = Color.White,
+                        color = BackgroundMedium,
                         shape = RoundedCornerShape(CornerRadius.md)
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "⚙",
-                    fontSize = 28.sp,
-                    color = Color(0xFF1E3A8A)
+                Image(
+                    painter = painterResource(Res.drawable.logo),
+                    contentDescription = "IAIAIN Logo",
+                    modifier = Modifier.size(28.sp.value.dp)
                 )
             }
 
@@ -80,7 +87,7 @@ fun LaunchingHeaderSection() {
                     color = TextWhite
                 )
                 Text(
-                    text = "INNOVATION NETWORK",
+                    text = "INCUBATION NETWORK",
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontSize = 9.sp,
                         letterSpacing = 1.sp
@@ -142,10 +149,10 @@ fun FeaturesSection() {
             FeatureCard(
                 //modifier = Modifier.weight(1f),
                 icon = {
-                    Text(
-                        text = "🌱",
-                        fontSize = 24.sp,
-                        color = AccentGreen
+                    Image(
+                        painter = painterResource(Res.drawable.juniorhubIcon),
+                        contentDescription = "IAIAIN Logo",
+                        modifier = Modifier.size(28.sp.value.dp)
                     )
                 },
                 title = "Junior Hub",
@@ -155,9 +162,10 @@ fun FeaturesSection() {
             FeatureCard(
                 //modifier = Modifier.weight(1f),
                 icon = {
-                    Text(
-                        text = "🏛️",
-                        fontSize = 24.sp
+                    Image(
+                        painter = painterResource(Res.drawable.campushubicon),
+                        contentDescription = "IAIAIN Logo",
+                        modifier = Modifier.size(28.sp.value.dp)
                     )
                 },
                 title = "Campus Hub",
@@ -167,9 +175,10 @@ fun FeaturesSection() {
             FeatureCard(
                 //modifier = Modifier.weight(1f),
                 icon = {
-                    Text(
-                        text = "🌐",
-                        fontSize = 24.sp
+                    Image(
+                        painter = painterResource(Res.drawable.glocalhubicon),
+                        contentDescription = "IAIAIN Logo",
+                        modifier = Modifier.size(28.sp.value.dp)
                     )
                 },
                 title = "Global Network",

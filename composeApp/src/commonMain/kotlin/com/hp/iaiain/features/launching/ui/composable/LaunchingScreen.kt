@@ -78,9 +78,10 @@ fun LaunchingScreen(
         )
 
         // Footer Section
+        /*
         FooterSection(
             onSocialLinkClick = { url -> onIntent(LaunchingIntent.OpenLink(url)) }
-        )
+        )*/
 
         // Error Dialog
         if (state.errorMessage != null) {
