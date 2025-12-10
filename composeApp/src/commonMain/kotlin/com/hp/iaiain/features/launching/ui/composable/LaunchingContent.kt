@@ -3,6 +3,7 @@ package com.hp.iaiain.features.launching.ui.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +29,9 @@ import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 import iaiain.composeapp.generated.resources.Res
 import iaiain.composeapp.generated.resources.logo
+import iaiain.composeapp.generated.resources.juniorhubIcon
+import iaiain.composeapp.generated.resources.campushubicon
+import iaiain.composeapp.generated.resources.glocalhubicon
 import com.hp.iaiain.design.components.FeatureCard
 import com.hp.iaiain.design.system.AccentGreen
 import com.hp.iaiain.design.system.AccentOrange
@@ -140,52 +144,108 @@ fun LaunchingHeaderSection() {
 
 @Composable
 fun FeaturesSection() {
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        val isMobile = maxWidth < 600.dp
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterHorizontally)
-        ) {
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Image(
-                        painter = painterResource(Res.drawable.juniorhubIcon),
-                        contentDescription = "IAIAIN Logo",
-                        modifier = Modifier.size(28.sp.value.dp)
-                    )
-                },
-                title = "Junior Hub",
-                description = "Nurturing young minds in schools with STEM programs"
-            )
+        if (isMobile) {
+            // Stack vertically on mobile
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+                verticalArrangement = Arrangement.spacedBy(Spacing.lg),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.juniorhubIcon),
+                            contentDescription = "Junior Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Junior Hub",
+                    description = "Nurturing young minds in schools with STEM programs"
+                )
 
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Image(
-                        painter = painterResource(Res.drawable.campushubicon),
-                        contentDescription = "IAIAIN Logo",
-                        modifier = Modifier.size(28.sp.value.dp)
-                    )
-                },
-                title = "Campus Hub",
-                description = "College incubation centers for real-world innovation"
-            )
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.campushubicon),
+                            contentDescription = "Campus Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Campus Hub",
+                    description = "College incubation centers for real-world innovation"
+                )
 
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Image(
-                        painter = painterResource(Res.drawable.glocalhubicon),
-                        contentDescription = "IAIAIN Logo",
-                        modifier = Modifier.size(28.sp.value.dp)
-                    )
-                },
-                title = "Global Network",
-                description = "Connecting with international innovation ecosystems"
-            )
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.glocalhubicon),
+                            contentDescription = "Global Network Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Global Network",
+                    description = "Connecting with international innovation ecosystems"
+                )
+            }
+        } else {
+            // Horizontal layout for tablet and desktop
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterHorizontally)
+            ) {
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.juniorhubIcon),
+                            contentDescription = "Junior Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Junior Hub",
+                    description = "Nurturing young minds in schools with STEM programs"
+                )
+
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.campushubicon),
+                            contentDescription = "Campus Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Campus Hub",
+                    description = "College incubation centers for real-world innovation"
+                )
+
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.glocalhubicon),
+                            contentDescription = "Global Network Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Global Network",
+                    description = "Connecting with international innovation ecosystems"
+                )
+            }
         }
-
+    }
 }
 
 @Composable
