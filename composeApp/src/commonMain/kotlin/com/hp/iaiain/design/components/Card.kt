@@ -50,19 +50,18 @@ fun FeatureCard(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
             .background(
-                color = SurfaceLight,
+                color = Color.Transparent,
                 shape = RoundedCornerShape(CornerRadius.lg)
             )
-            .padding(Spacing.lg),
+            .padding(Spacing.md),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
             modifier = Modifier
-                .size(IconSize.lg)
+                .size(IconSize.xl)
                 .background(
-                    color = Color(0xFF1B3A6B),
+                    color = Color(0xFF1B5E8F),
                     shape = RoundedCornerShape(CornerRadius.md)
                 ),
             contentAlignment = Alignment.Center
@@ -81,7 +80,8 @@ fun FeatureCard(
             text = description,
             style = MaterialTheme.typography.bodySmall,
             color = TextGray,
-            modifier = Modifier.padding(top = Spacing.xs)
+            modifier = Modifier.padding(top = Spacing.sm),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
         )
     }
 }

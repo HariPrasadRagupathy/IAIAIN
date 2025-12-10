@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hp.iaiain.design.components.FeatureCard
 import com.hp.iaiain.design.system.AccentGreen
@@ -31,6 +33,7 @@ import com.hp.iaiain.design.system.Spacing
 import com.hp.iaiain.design.system.SurfaceLight
 import com.hp.iaiain.design.system.TextGray
 import com.hp.iaiain.design.system.TextWhite
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LaunchingHeaderSection() {
@@ -130,45 +133,50 @@ fun LaunchingHeaderSection() {
 
 @Composable
 fun FeaturesSection() {
-    Row(
-        modifier = Modifier
-            .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.lg)
-    ) {
-        FeatureCard(
-            icon = {
-                Text(
-                    text = "🌱",
-                    fontSize = 24.sp,
-                    color = AccentGreen
-                )
-            },
-            title = "Junior Hub",
-            description = "Nurture junior minds to grow with great programs"
-        )
 
-        FeatureCard(
-            icon = {
-                Text(
-                    text = "🏫",
-                    fontSize = 24.sp
-                )
-            },
-            title = "Campus Hub",
-            description = "Forge bold collaborations across earth innovation"
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+          horizontalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterHorizontally)
+        ) {
+            FeatureCard(
+                //modifier = Modifier.weight(1f),
+                icon = {
+                    Text(
+                        text = "🌱",
+                        fontSize = 24.sp,
+                        color = AccentGreen
+                    )
+                },
+                title = "Junior Hub",
+                description = "Nurturing young minds in schools with STEM programs"
+            )
 
-        FeatureCard(
-            icon = {
-                Text(
-                    text = "🌐",
-                    fontSize = 24.sp
-                )
-            },
-            title = "Global Network",
-            description = "Connect with recognized innovators ecosystem"
-        )
-    }
+            FeatureCard(
+                //modifier = Modifier.weight(1f),
+                icon = {
+                    Text(
+                        text = "🏛️",
+                        fontSize = 24.sp
+                    )
+                },
+                title = "Campus Hub",
+                description = "College incubation centers for real-world innovation"
+            )
+
+            FeatureCard(
+                //modifier = Modifier.weight(1f),
+                icon = {
+                    Text(
+                        text = "🌐",
+                        fontSize = 24.sp
+                    )
+                },
+                title = "Global Network",
+                description = "Connecting with international innovation ecosystems"
+            )
+        }
+
 }
 
 @Composable
@@ -194,7 +202,7 @@ fun CountdownSection(
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.spacedBy(Spacing.xxxl, Alignment.CenterHorizontally)
         ) {
             CountdownItem(value = days, label = "Days")
             CountdownItem(value = hours, label = "Hours")
@@ -212,7 +220,7 @@ fun CountdownItem(value: Int, label: String) {
             .background(
                 color = SurfaceLight,
                 shape = RoundedCornerShape(CornerRadius.lg)
-            )
+            ).width(80.dp)
             .padding(Spacing.md)
     ) {
         Text(
@@ -230,4 +238,3 @@ fun CountdownItem(value: Int, label: String) {
         )
     }
 }
-
