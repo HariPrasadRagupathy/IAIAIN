@@ -3,20 +3,20 @@ package com.hp.iaiain.features.launching.ui.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.Image
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,16 +24,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.painterResource
+import iaiain.composeapp.generated.resources.Res
+import iaiain.composeapp.generated.resources.logo
+import iaiain.composeapp.generated.resources.juniorhubIcon
+import iaiain.composeapp.generated.resources.campushubicon
+import iaiain.composeapp.generated.resources.glocalhubicon
 import com.hp.iaiain.design.components.FeatureCard
-import com.hp.iaiain.design.system.AccentGreen
 import com.hp.iaiain.design.system.AccentOrange
+import com.hp.iaiain.design.system.BackgroundMedium
 import com.hp.iaiain.design.system.CornerRadius
 import com.hp.iaiain.design.system.IconSize
 import com.hp.iaiain.design.system.Spacing
 import com.hp.iaiain.design.system.SurfaceLight
 import com.hp.iaiain.design.system.TextGray
 import com.hp.iaiain.design.system.TextWhite
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LaunchingHeaderSection() {
@@ -53,15 +58,15 @@ fun LaunchingHeaderSection() {
                 modifier = Modifier
                     .size(IconSize.xl)
                     .background(
-                        color = Color.White,
+                        color = BackgroundMedium,
                         shape = RoundedCornerShape(CornerRadius.md)
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "⚙",
-                    fontSize = 28.sp,
-                    color = Color(0xFF1E3A8A)
+                Image(
+                    painter = painterResource(Res.drawable.logo),
+                    contentDescription = "IAIAIN Logo",
+                    modifier = Modifier.size(28.sp.value.dp)
                 )
             }
 
@@ -80,7 +85,7 @@ fun LaunchingHeaderSection() {
                     color = TextWhite
                 )
                 Text(
-                    text = "INNOVATION NETWORK",
+                    text = "INCUBATION NETWORK",
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontSize = 9.sp,
                         letterSpacing = 1.sp
@@ -133,50 +138,108 @@ fun LaunchingHeaderSection() {
 
 @Composable
 fun FeaturesSection() {
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        val isMobile = maxWidth < 600.dp
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterHorizontally)
-        ) {
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Text(
-                        text = "🌱",
-                        fontSize = 24.sp,
-                        color = AccentGreen
-                    )
-                },
-                title = "Junior Hub",
-                description = "Nurturing young minds in schools with STEM programs"
-            )
+        if (isMobile) {
+            // Stack vertically on mobile
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+                verticalArrangement = Arrangement.spacedBy(Spacing.lg),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.juniorhubIcon),
+                            contentDescription = "Junior Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Junior Hub",
+                    description = "Nurturing young minds in schools with STEM programs"
+                )
 
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Text(
-                        text = "🏛️",
-                        fontSize = 24.sp
-                    )
-                },
-                title = "Campus Hub",
-                description = "College incubation centers for real-world innovation"
-            )
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.campushubicon),
+                            contentDescription = "Campus Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Campus Hub",
+                    description = "College incubation centers for real-world innovation"
+                )
 
-            FeatureCard(
-                //modifier = Modifier.weight(1f),
-                icon = {
-                    Text(
-                        text = "🌐",
-                        fontSize = 24.sp
-                    )
-                },
-                title = "Global Network",
-                description = "Connecting with international innovation ecosystems"
-            )
+                FeatureCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.glocalhubicon),
+                            contentDescription = "Global Network Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Global Network",
+                    description = "Connecting with international innovation ecosystems"
+                )
+            }
+        } else {
+            // Horizontal layout for tablet and desktop
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterHorizontally)
+            ) {
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.juniorhubIcon),
+                            contentDescription = "Junior Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Junior Hub",
+                    description = "Nurturing young minds in schools with STEM programs"
+                )
+
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.campushubicon),
+                            contentDescription = "Campus Hub Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Campus Hub",
+                    description = "College incubation centers for real-world innovation"
+                )
+
+                FeatureCard(
+                    modifier = Modifier.weight(1f),
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.glocalhubicon),
+                            contentDescription = "Global Network Icon",
+                            modifier = Modifier.size(28.sp.value.dp)
+                        )
+                    },
+                    title = "Global Network",
+                    description = "Connecting with international innovation ecosystems"
+                )
+            }
         }
-
+    }
 }
 
 @Composable
@@ -186,41 +249,79 @@ fun CountdownSection(
     minutes: Int,
     seconds: Int
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
-        horizontalAlignment = Alignment.CenterHorizontally
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "Launch Countdown",
-            style = MaterialTheme.typography.titleLarge,
-            color = TextWhite,
-            modifier = Modifier.padding(bottom = Spacing.lg)
-        )
+        val isMobile = maxWidth < 600.dp
+        val isTablet = maxWidth >= 600.dp && maxWidth < 840.dp
 
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.xxxl, Alignment.CenterHorizontally)
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CountdownItem(value = days, label = "Days")
-            CountdownItem(value = hours, label = "Hours")
-            CountdownItem(value = minutes, label = "Minutes")
-            CountdownItem(value = seconds, label = "Seconds")
+            Text(
+                text = "Launch Countdown",
+                style = MaterialTheme.typography.titleLarge,
+                color = TextWhite,
+                modifier = Modifier.padding(bottom = Spacing.lg)
+            )
+
+            if (isMobile) {
+                // 2x2 Grid layout for mobile
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.md),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.md, Alignment.CenterHorizontally)
+                    ) {
+                        CountdownItem(value = days, label = "Days", modifier = Modifier.weight(1f))
+                        CountdownItem(value = hours, label = "Hours", modifier = Modifier.weight(1f))
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.md, Alignment.CenterHorizontally)
+                    ) {
+                        CountdownItem(value = minutes, label = "Minutes", modifier = Modifier.weight(1f))
+                        CountdownItem(value = seconds, label = "Seconds", modifier = Modifier.weight(1f))
+                    }
+                }
+            } else {
+                // Horizontal layout for tablet and desktop
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        if (isTablet) Spacing.lg else Spacing.xxl,
+                        Alignment.CenterHorizontally
+                    )
+                ) {
+                    CountdownItem(value = days, label = "Days")
+                    CountdownItem(value = hours, label = "Hours")
+                    CountdownItem(value = minutes, label = "Minutes")
+                    CountdownItem(value = seconds, label = "Seconds")
+                }
+            }
         }
     }
 }
 
 @Composable
-fun CountdownItem(value: Int, label: String) {
+fun CountdownItem(
+    value: Int,
+    label: String,
+    modifier: Modifier = Modifier
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .background(
                 color = SurfaceLight,
                 shape = RoundedCornerShape(CornerRadius.lg)
-            ).width(80.dp)
+            )
             .padding(Spacing.md)
     ) {
         Text(
