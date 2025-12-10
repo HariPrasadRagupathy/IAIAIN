@@ -10,14 +10,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.Image
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -33,7 +31,6 @@ import iaiain.composeapp.generated.resources.juniorhubIcon
 import iaiain.composeapp.generated.resources.campushubicon
 import iaiain.composeapp.generated.resources.glocalhubicon
 import com.hp.iaiain.design.components.FeatureCard
-import com.hp.iaiain.design.system.AccentGreen
 import com.hp.iaiain.design.system.AccentOrange
 import com.hp.iaiain.design.system.BackgroundMedium
 import com.hp.iaiain.design.system.CornerRadius
@@ -42,9 +39,6 @@ import com.hp.iaiain.design.system.Spacing
 import com.hp.iaiain.design.system.SurfaceLight
 import com.hp.iaiain.design.system.TextGray
 import com.hp.iaiain.design.system.TextWhite
-import iaiain.composeapp.generated.resources.campushubicon
-import iaiain.composeapp.generated.resources.glocalhubicon
-import iaiain.composeapp.generated.resources.juniorhubIcon
 
 @Composable
 fun LaunchingHeaderSection() {
@@ -255,41 +249,79 @@ fun CountdownSection(
     minutes: Int,
     seconds: Int
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
-        horizontalAlignment = Alignment.CenterHorizontally
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "Launch Countdown",
-            style = MaterialTheme.typography.titleLarge,
-            color = TextWhite,
-            modifier = Modifier.padding(bottom = Spacing.lg)
-        )
+        val isMobile = maxWidth < 600.dp
+        val isTablet = maxWidth >= 600.dp && maxWidth < 840.dp
 
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.xxxl, Alignment.CenterHorizontally)
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CountdownItem(value = days, label = "Days")
-            CountdownItem(value = hours, label = "Hours")
-            CountdownItem(value = minutes, label = "Minutes")
-            CountdownItem(value = seconds, label = "Seconds")
+            Text(
+                text = "Launch Countdown",
+                style = MaterialTheme.typography.titleLarge,
+                color = TextWhite,
+                modifier = Modifier.padding(bottom = Spacing.lg)
+            )
+
+            if (isMobile) {
+                // 2x2 Grid layout for mobile
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.md),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.md, Alignment.CenterHorizontally)
+                    ) {
+                        CountdownItem(value = days, label = "Days", modifier = Modifier.weight(1f))
+                        CountdownItem(value = hours, label = "Hours", modifier = Modifier.weight(1f))
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.md, Alignment.CenterHorizontally)
+                    ) {
+                        CountdownItem(value = minutes, label = "Minutes", modifier = Modifier.weight(1f))
+                        CountdownItem(value = seconds, label = "Seconds", modifier = Modifier.weight(1f))
+                    }
+                }
+            } else {
+                // Horizontal layout for tablet and desktop
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        if (isTablet) Spacing.lg else Spacing.xxl,
+                        Alignment.CenterHorizontally
+                    )
+                ) {
+                    CountdownItem(value = days, label = "Days")
+                    CountdownItem(value = hours, label = "Hours")
+                    CountdownItem(value = minutes, label = "Minutes")
+                    CountdownItem(value = seconds, label = "Seconds")
+                }
+            }
         }
     }
 }
 
 @Composable
-fun CountdownItem(value: Int, label: String) {
+fun CountdownItem(
+    value: Int,
+    label: String,
+    modifier: Modifier = Modifier
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .background(
                 color = SurfaceLight,
                 shape = RoundedCornerShape(CornerRadius.lg)
-            ).width(80.dp)
+            )
             .padding(Spacing.md)
     ) {
         Text(
