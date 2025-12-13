@@ -8,11 +8,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,12 +27,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.hp.iaiain.design.system.Spacing
 import com.hp.iaiain.design.system.TextGray
 import com.hp.iaiain.design.system.TextWhite
 import com.hp.iaiain.features.launching.presentation.mvi.LaunchingIntent
 import com.hp.iaiain.features.launching.presentation.mvi.LaunchingScreenState
+import org.jetbrains.compose.resources.painterResource
+import iaiain.composeapp.generated.resources.Res
+import iaiain.composeapp.generated.resources.rocketicon
 
 @Composable
 fun LaunchingScreen(
@@ -93,6 +103,11 @@ fun LaunchingScreen(
                     hours = state.countdownHours,
                     minutes = state.countdownMinutes,
                     seconds = state.countdownSeconds
+                )
+
+                // Learn More Button Section
+                LearnMoreSection(
+                    onLearnMoreClick = { onIntent(LaunchingIntent.OpenLink("https://gamma.app/embed/vp6kx8w3dcp5htv")) }
                 )
 
                 // Early Access Form Section
@@ -170,7 +185,7 @@ fun FooterSection(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+            horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = { onSocialLinkClick("https://facebook.com") }) {
                 Text("f", color = TextWhite)
@@ -222,3 +237,37 @@ fun SuccessDialog(
     )
 }
 
+@Composable
+fun LearnMoreSection(
+    onLearnMoreClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = Spacing.lg),
+        contentAlignment = Alignment.Center
+    ) {
+        Button(
+            onClick = onLearnMoreClick,
+            modifier = Modifier
+                .fillMaxWidth(0.6f)
+                .height(56.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF3B82F6), // Blue color
+                contentColor = Color.White
+            )
+        ) {
+            Icon(
+                painter = painterResource(Res.drawable.rocketicon),
+                contentDescription = "Launch",
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Text(
+                text = "Learn More About IAIAIN",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    }
+}
